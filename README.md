@@ -16,5 +16,6 @@ I wrote a program that would generate the code to do this.
 The user is able to pick the number of options and customize the messages for each case, depending on how many correct and incorrect choices the user selected.
 
 <h3>Contents</h3>
+
 This is a Windows application written using WPF within Visual Studio. The program is contained in DesmosCodeGen/ and the publication project is contained in CodeGenWiXSetup/.
  
