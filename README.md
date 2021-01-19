@@ -10,7 +10,7 @@ One such component is a Multiple Choice Question. My mother is a math teacher an
 that they were correct or describe in what way they were not.
 When you have multiple choice questions that have many choices and several correct ones, it becomes painstaking to manually cover every possible combination of selections with Computation Layer, so
 I wrote a program that would generate the code to do this.
-
+<br><br>
 The user is able to pick the number of options and customize the messages for each case, depending on how many correct and incorrect choices the user selected.
 
 <h3>Contents</h3>
