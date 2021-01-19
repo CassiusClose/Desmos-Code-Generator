@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+		xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+
+	<Product Id="*" Name="CodeGenWiXSetup" Language="1033" Version="1.0.0.0" Manufacturer="CassiusClose" UpgradeCode="2e9cfb14-9343-449b-ae68-3c7bb7ab25a8">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of Desmos Code Generator is already installed." />
+		<MediaTemplate EmbedCab="yes"/>
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+		<UIRef Id="WixUI_InstallDir" />
+		
+		<Icon Id="desmoslogo.ico" SourceFile="../desmoslogo.ico"/>
+
+		<Feature Id="MainApplication" Title="DesmosCodeGen" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentRef Id="ApplicationShortcut" />
+		</Feature>
+		
+
+	
+	</Product>
+	
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="Desmos Code Generator" />
+			</Directory>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ApplicationProgramsFolder" Name="Desmos Code Generator"/>
+			</Directory>
+		</Directory>
+		
+	
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component Id="ApplicationShortcut" Guid="faf80dfc-7f85-43dd-8167-f0279783a0fa">
+				<Shortcut Id="ApplicationStartMenuShortcut" 
+						  Name="Desmos Code Generator"
+						  Description="Generatos Computation Layer code"
+						  Target="[#DesmosCodeGen.exe]"
+						  WorkingDirectory="APPLICATIONROOTDIRECTORY"
+						  Icon="desmoslogo.ico"/>
+				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+				<RegistryValue Root="HKCU" Key="Software\CassiusClose\DesmosCodeGen" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+
+	<Fragment>
+			<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+				<Component Id="DesmosCodeGen.exe">
+					<File Source="$(var.DesmosCodeGen.TargetPath)"/>
+				</Component>
+				<Component Id="Xceed.Wpf.AvalonDock.dll" Guid="b4ae012b-6301-4929-af55-b5ef935f58c9">
+					<File Id="Xceed.Wpf.AvalonDock.dll" Source="Xceed.Wpf.AvalonDock.dll" KeyPath="yes" Checksum="yes"/>
+				</Component>
+				<Component Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Guid="2f8f64ce-ce35-43ce-955d-4db1093e0ccb">
+					<File Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Source="Xceed.Wpf.AvalonDock.Themes.Aero.dll" KeyPath="yes" Checksum="yes"/>
+				</Component>
+				<Component Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Guid="5f392bd9-65ad-48d7-a9ff-c38bec29b5ea">
+					<File Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Source="Xceed.Wpf.AvalonDock.Themes.Metro.dll" KeyPath="yes" Checksum="yes"/>
+				</Component>
+				<Component Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Guid="6c75f964-5a77-4993-b69c-7866d1a17663">
+					<File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Source="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" KeyPath="yes" Checksum="yes"/>
+				</Component>
+				<Component Id="Xceed.Wpf.Toolkit.dll" Guid="7ae40f0b-2071-40a7-a6c3-800096b4b4ec">
+					<File Id="Xceed.Wpf.Toolkit.dll" Source="Xceed.Wpf.Toolkit.dll" KeyPath="yes" Checksum="yes"/>
+				</Component>
+			</ComponentGroup>
+	</Fragment>
+</Wix>
